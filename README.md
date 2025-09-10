@@ -52,3 +52,21 @@ Schema হলো ডাটাবেসের মধ্যে একটি যু
 
 - PostgreSQL এ TEXT টাইপ কোনো সীমা ছাড়া ব্যবহার করা যায় এবং অনেক সময় VARCHAR এর বদলে TEXT ব্যবহার করা হয়।
 উদাহরণ: name VARCHAR(100) vs code CHAR(5) (যদি সব কোড ঠিক 5 অক্ষর হয়)।
+
+## প্রশ্ন 5 — JOIN অপারেশনের উদ্দেশ্য এবং PostgreSQL-এ এটা কিভাবে কাজ করে?
+
+JOIN দুই বা ততোধিক টেবিলকে লজিক্যালি মিলিয়ে একসাথে কিউরির রেজাল্ট দেয়। সবচেয়ে প্রচলিত ধরনগুলো:
+
+- INNER JOIN: উভয় টেবিলে মিল আছে এমন রোইয়েই দেয়।
+
+- LEFT JOIN (বা LEFT OUTER): বাম টেবিলের সব রো এবং মেলে এমন ডান টেবিলের রো; না-matching হলে ডান কলামগুলো NULL হয়।
+
+- RIGHT JOIN ও FULL JOIN অনুরূপ (ডান বা পুরো মিল)।
+
+ ### কিভাবে কাজ করে (উদাহরণ):
+ ```sql
+SELECT r.name, COUNT(s.sighting_id) AS cnt
+FROM rangers r
+LEFT JOIN sightings s ON r.ranger_id = s.ranger_id
+GROUP BY r.name;
+```
