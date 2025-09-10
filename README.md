@@ -28,4 +28,23 @@ Schema হলো ডাটাবেসের মধ্যে একটি যু
 CREATE SCHEMA research;
 SET search_path TO research, public;`
 
+## প্রশ্ন 3 — Primary Key (PK) ও Foreign Key (FK) কি এবং কিভাবে কাজ করে?
 
+## Primary Key (PK):
+
+প্রতিটি রেকর্ডকে ইউনিকভাবে চিহ্নিত করে। একাধিক কলামের যৌথ PK ও সম্ভব।
+
+সাধারণত `NOT NULL ও UNIQUE।`
+
+উদাহরণ: CREATE TABLE rangers (ranger_id SERIAL PRIMARY KEY, name TEXT);
+
+## Foreign Key (FK):
+
+এক টেবিলকে অন্য টেবিলের `PK` (বা `UNIQUE` কলাম) এর সাথে যুক্ত করে রিলেশন তৈরি করে।
+
+রেফারেন্সড টেবিলের সাথে ডাটা ইন্টিগ্রিটি নিশ্চিত করে — orphan রেকর্ড আটকায়।
+
+**উদাহরণ:**  
+`CREATE TABLE sightings (sighting_id SERIAL PRIMARY KEY, ranger_id INT REFERENCES rangers(ranger_id));`
+
+`FK` কনস্ট্রেইন্ট ডিফল্টভাবে রেফারেন্স ইন্টিগ্রিটি বজায় রাখে — যদি রেফারেন্সড `rangers` এ `ranger_id` না থাকে তাহলে `INSERT` ব্যর্থ হবে; অথবা `ON DELETE CASCADE` ব্যবহার করে ডিলেট-এ স্বয়ংক্রিয়ভাবে সম্পর্কিত রেকর্ড মুছতে দেয়।
