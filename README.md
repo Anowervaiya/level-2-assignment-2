@@ -18,15 +18,12 @@ CREATE DATABASE mydb;
 Schema হলো ডাটাবেসের মধ্যে একটি যুক্তিবদ্ধ নামস্থান (namespace) — এটি টেবিল, ভিউ, ফাংশন, টাইপ ইত্যাদি গোষ্ঠীভুক্ত করে। Schema ব্যবহারের সুবিধা: 
 
 **উদাহরণ:**  
-একই ডাটাবেসে বিভিন্ন প্রজেক্ট/মডিউল আলাদা করার সুবিধা (উদাহরণ: `public`, `analytics`, `archive`)।
+- একই ডাটাবেসে বিভিন্ন প্রজেক্ট/মডিউল আলাদা করার সুবিধা (উদাহরণ: `public`, `analytics`, `archive`)।
 
-নাম সংঘর্ষ (name collision) কমায় — একই নামে দুইটি টেবিল আলাদা `schema` তে থাকতে পারে।
+- নাম সংঘর্ষ (name collision) কমায় — একই নামে দুইটি টেবিল আলাদা `schema` তে থাকতে পারে।
 
-অনুমতি ও রোল ভিত্তিক অ্যাক্সেস নিয়ন্ত্রণ সহজ করে (GRANT/REVOKE)।
-উদাহরণ: 
-`
-CREATE SCHEMA research;
-SET search_path TO research, public;`
+- অনুমতি ও রোল ভিত্তিক অ্যাক্সেস নিয়ন্ত্রণ সহজ করে (GRANT/REVOKE)।
+- উদাহরণ: `CREATE SCHEMA research; SET search_path TO research, public;`
 
 ## প্রশ্ন 3 — Primary Key (PK) ও Foreign Key (FK) কি এবং কিভাবে কাজ করে?
 
